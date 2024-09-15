@@ -2,7 +2,6 @@ package com.blackjack.game.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-//import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
