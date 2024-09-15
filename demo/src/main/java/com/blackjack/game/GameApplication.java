@@ -2,10 +2,12 @@ package com.blackjack.game;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.Stack;
 
 @SpringBootApplication
+@ComponentScan("com.*")
 public class GameApplication {
 
 	public static void main(String[] args) {
