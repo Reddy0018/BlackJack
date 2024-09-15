@@ -1,0 +1,165 @@
+package com.blackjack.game;
+
+import java.util.*;
+
+public class BlackJack {
+
+    public List<Player> BlackJack(Player player, Player dealer, Stack<CardObject> deck) {
+        //Shuffling the building deck
+        shuffleDeck(deck);
+
+        //need to build player objects
+        /**dealer = new Player("Dealer");
+        player = new Player("Sumanth");*/
+
+        //need to implement initial card distribution func to players
+        player.setPlayerCards(Arrays.asList(deck.pop(),deck.pop()));
+        dealer.setPlayerCards(Arrays.asList(deck.pop(),deck.pop()));
+        dealer.getPlayerCards().get(1).setHidden(true);
+
+
+        //Calculating initial total Score of both players
+        calculateCardsTotalValue(player);
+        calculateCardsTotalValue(dealer);
+
+        //Calculate if the player won BlackJack
+        calculateBlackJackStatus(player,dealer);
+        //Calculate if the player Score went above 21
+        calculatePlayerBustStatus(player,dealer);
+
+        /**System.out.println("Dealer Cards:: "+ dealer);
+        System.out.println("Dealer Cards:: "+ player);*/
+        return Arrays.asList(player,dealer);
+    }
+
+    public Stack<CardObject>  buildDeck(Stack<CardObject> deck){
+        deck = new Stack<>();
+        List<String> cardTypes = Arrays.asList("Spade","Hearts","Diamonds","Clubs");
+        List<String> cardValues = Arrays.asList("2","3","4","5","6","7","8","9","10","A","Jack","Queen","King");
+        CardObject object = null;
+        for(String cardType: cardTypes){
+            for(String cardValue: cardValues){
+                object = new CardObject(cardType,cardValue);
+                deck.add(object);
+            }
+        }
+        /**System.out.println("Deck:: "+ deck);
+        System.out.println("Deck:: "+ deck.size());*/
+        return deck;
+    }
+
+    public boolean dealerPlayFunction(Player player, Player dealer, Stack<CardObject> deck){
+
+        dealer.getPlayerCards().get(1).setHidden(false);
+        calculateBlackJackStatus(dealer,player);
+        if(dealer.getBlackjackWin()){
+            return true;
+        }
+        if(player.getTotal()==21){
+            player.setWinFlag(true);
+            dealer.setWinFlag(false);
+            dealer.setBustFlag(true);
+            return  true;
+        }else if (dealer.getTotal()>player.getTotal()){
+            player.setWinFlag(false);
+            dealer.setWinFlag(true);
+            player.setBustFlag(true);
+            dealer.setBustFlag(false);
+            return true;
+        }
+
+        if(dealer.getTotal()==player.getTotal()){
+            dealer.setGameDraw(true);
+            player.setGameDraw(true);
+            return true;
+        }
+
+       // if(dealer.getTotal()>17 && !dealer.getWinFlag()){
+        if(dealer.getTotal()>17 && dealer.getTotal()<player.getTotal()){
+                dealer.setBustFlag(true);
+                dealer.setWinFlag(false);
+                player.setWinFlag(true);
+                return true;
+        }
+
+        while (dealer.getTotal()<=17){
+            List<CardObject> dealerCards = new ArrayList<>(dealer.getPlayerCards());
+            dealerCards.add(deck.pop());
+            dealer.setPlayerCards(dealerCards);
+            calculateCardsTotalValue(dealer);
+            if(dealer.getTotal()>21){
+                calculatePlayerBustStatus(dealer,player);
+                break;
+            }else if (dealer.getTotal()>player.getTotal()){
+                dealer.setWinFlag(true);
+                player.setBustFlag(true);
+                player.setWinFlag(false);
+                break;
+            }else if (dealer.getTotal() == player.getTotal()){
+                dealer.setGameDraw(true);
+                player.setGameDraw(true);
+                break;
+            }
+        }
+        return true;
+    }
+
+    private void shuffleDeck(Stack<CardObject> deck){
+        Collections.shuffle(deck);
+        /**System.out.println("Shuffled Deck:: "+ deck);
+        System.out.println("Shuffled Deck:: "+ deck.size());*/
+    }
+
+    public void calculateBlackJackStatus(Player player, Player dealer){
+        if(player.getTotal()==21){
+            player.getOptions().setEnableHitButton(false);
+            player.getOptions().setEnableStandButton(false);
+            player.setWinFlag(true);
+            player.setBlackjackWin(true);
+            //dealer.setBustFlag(true);
+            //dealer.setWinFlag(false);
+        }
+    }
+
+    public void calculatePlayerBustStatus(Player player, Player dealer){
+        if(player.getTotal()>21){
+            player.getOptions().setEnableHitButton(false);
+            player.getOptions().setEnableStandButton(false);
+            player.setBustFlag(true);
+            player.setWinFlag(false);
+            dealer.setWinFlag(true);
+            player.getOptions().setEnableHitButton(false);
+        }
+    }
+
+    public void calculateCardsTotalValue(Player player){
+        int total = 0;
+        int totalAces =0;
+        for(CardObject cardObject: player.getPlayerCards()){
+            if(cardObject.getCardvalue().contains("Queen")||
+                    cardObject.getCardvalue().contains("Jack")||
+                    cardObject.getCardvalue().contains("King")){
+                total = total + 10;
+            } else if (cardObject.getCardvalue().contains("A")) {
+                totalAces+=1;
+            } else {
+                total = total + Integer.parseInt(cardObject.getCardvalue());
+            }
+        }
+        if(totalAces!=0){
+            for(int i=0; i<totalAces; i++){
+                if(total+11<=21){
+                    total+=11;
+                }else {
+                    /**if(total+1>21){
+                        player.setWinFlag(false);
+                    }*/
+                    total+=1;
+                }
+            }
+        }
+        player.setTotal(total);
+        System.out.println("Player Total:: "+ player.getTotal());
+    }
+
+}
