@@ -1,4 +1,4 @@
-package com.blackjack.game;
+package com.blackjack.game.blackjack;
 
 public class OptionsEnableClass {
     private Boolean enableHitButton =true;

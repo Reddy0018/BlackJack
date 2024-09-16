@@ -1,4 +1,4 @@
-package com.blackjack.game;
+package com.blackjack.game.blackjack;
 
 public class CardObject {
     private String cardType;

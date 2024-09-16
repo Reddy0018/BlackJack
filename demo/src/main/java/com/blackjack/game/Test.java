@@ -1,57 +1,35 @@
 package com.blackjack.game;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
 
 public class Test {
+
     public static void main(String[] args) {
-        List<Integer> A = new ArrayList<>();
-        A.addAll(Arrays.asList(1,2,3,4,5,6,7,8,9));
 
-        int k = 7;
-        Integer a = null;
-        Integer b = null;
-        int i  =0;
-        int j = A.size();
+        JFrame f = new JFrame("A JFrame");
+        f.setSize(250, 250);
+        f.setLocation(300,200);
+        final JTextArea textArea = new JTextArea(10, 40);
+        f.getContentPane().add(BorderLayout.CENTER, textArea);
+        final JButton button = new JButton("Click Me");
+        f.getContentPane().add(BorderLayout.SOUTH, button);
+        button.addActionListener(new ActionListener() {
 
-        int mid = (int) Math.floor( i+j/2);
-        System.out.println(mid);
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textArea.append("Button was clicked\n");
 
-        while(i<=mid){
-            if(A.get(mid)==k){
-                mid=mid-1;
-            } else if (A.get(mid)<k) {
-                a=A.get(mid);
-                mid = mid-1;
-                break;
-            }else if (A.get(mid-1)<k) {
-                a = A.get(mid - 1);
-                mid = mid - 1;
-                break;
             }
-                else {
-                mid = mid-1;
-            }
-        }
-        System.out.println(a);
+        });
 
-        while(mid<=j){
-            if(A.get(mid)==k){
-                mid=mid+1;
-            } else if (A.get(mid)>k) {
-                b=A.get(mid);
-                mid = mid+1;
-                break;
-            }else if (A.get(mid+1)>k) {
-                b = A.get(mid + 1);
-                mid = mid + 1;
-                break;
-            }
-            else {
-                mid = mid+1;
-            }
-        }
-        System.out.println(b);
+        f.setVisible(true);
+
     }
+
 }

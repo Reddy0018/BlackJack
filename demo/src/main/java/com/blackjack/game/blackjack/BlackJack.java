@@ -1,4 +1,4 @@
-package com.blackjack.game;
+package com.blackjack.game.blackjack;
 
 import java.util.*;
 

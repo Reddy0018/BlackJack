@@ -1,4 +1,4 @@
-package com.blackjack.game;
+package com.blackjack.game.blackjack;
 
 import com.blackjack.game.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
