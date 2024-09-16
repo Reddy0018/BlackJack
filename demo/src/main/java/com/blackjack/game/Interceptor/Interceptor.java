@@ -16,12 +16,13 @@ public class Interceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-        System.out.println("Inside Pre Handle request: "+ request);
+        System.out.println("Inside Pre Handle request: ");
         if(null== UserService.getActiveUserName()){
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setCharacterEncoding("UTF-8");
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            response.getWriter().write("User needs to be loggedIn to perform operations!");
+            //response.sendError(HttpServletResponse.SC_FORBIDDEN,"User not authenticated needs to be loggedIn to perform operations");
+            response.getWriter().write("User not authenticated needs to be loggedIn to perform operations!");
             return false;
         }
         return true;
@@ -30,7 +31,7 @@ public class Interceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response,
                            Object handler, ModelAndView modelAndView) throws Exception {
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 
     @Override
