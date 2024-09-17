@@ -4,6 +4,7 @@ import com.blackjack.game.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -156,6 +157,7 @@ public class Login implements ActionListener {
                 try {
                     if(checkEmpty(loginRequestMap)){
                         success.setText("Fields cannot be empty!");
+                        success.setForeground(Color.RED);
                         break;
                     }
                     /**if (nameField.getText().isEmpty() || emailField.getText().isEmpty()) {
@@ -166,8 +168,10 @@ public class Login implements ActionListener {
                     boolean loginStatus = userService.validateLoginDetails(loginRequestMap);
                     if(loginStatus){
                         success.setText("Login Success");
+                        success.setForeground(Color.GREEN);
                     }else {
                         success.setText("User Not Valid");
+                        success.setForeground(Color.RED);
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
@@ -186,11 +190,13 @@ public class Login implements ActionListener {
                 try {
                     if(checkEmpty(signUpRequestMap)){
                         success.setText("Fields cannot be empty!");
+                        success.setForeground(Color.RED);
                         break;
                     }
                     BeanProvider.autowire(this);
                     userService.validateSignUp(signUpRequestMap);
                     success.setText("Sign UP Success");
+                    success.setForeground(Color.GREEN);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                     success.setText(ex.getMessage());
