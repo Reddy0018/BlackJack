@@ -1,5 +1,6 @@
 package com.blackjack.game.user;
 
+import com.blackjack.game.UI.BeanProvider;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     private User user = null;
+
+    public UserService(){
+        BeanProvider.autowire(this);
+    }
 
 
     @Getter
