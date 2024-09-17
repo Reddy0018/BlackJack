@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class Login implements ActionListener {
     private static JLabel userLabel, passwordLabel, success, firstNameLabel, lastNameLabel;
@@ -148,7 +147,6 @@ public class Login implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
         String action = e.getActionCommand();
         switch (action) {
             case "Login":

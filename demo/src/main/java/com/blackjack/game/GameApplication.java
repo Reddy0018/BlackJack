@@ -1,9 +1,7 @@
 package com.blackjack.game;
 
-import com.blackjack.game.UI.BeanProvider;
 import com.blackjack.game.UI.Login;
 import com.blackjack.game.blackjack.BlackJack;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,7 +19,6 @@ public class GameApplication {
 		/**Test test = new Test();
 		test.main(args);*/
 		login.createLoginScreen();
-		//login.createSignupScreen();
 		BlackJack blackJack = new BlackJack();
 		SpringApplication.run(GameApplication.class, args);
 	}
