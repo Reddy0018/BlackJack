@@ -3,7 +3,6 @@ package com.blackjack.game.UI;
 import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.blackjack.GameController;
 import com.blackjack.game.blackjack.Player;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 import java.awt.*;
