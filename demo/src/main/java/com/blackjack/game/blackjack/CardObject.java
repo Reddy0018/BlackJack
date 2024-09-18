@@ -18,6 +18,10 @@ public class CardObject {
         this.cardvalue=cardvalue;
     }
 
+    public String cardPath(){
+        return "./cards/"+this.cardType+"-"+this.cardvalue+".png";
+    }
+
     public String getCardType() {
         return cardType;
     }
