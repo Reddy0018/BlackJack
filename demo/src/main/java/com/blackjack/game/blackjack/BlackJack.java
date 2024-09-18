@@ -51,6 +51,9 @@ public class BlackJack {
     public boolean dealerPlayFunction(Player player, Player dealer, Stack<CardObject> deck){
 
         dealer.getPlayerCards().get(1).setHidden(false);
+        if(player.getBustFlag()){
+            return true;
+        }
         calculateBlackJackStatus(dealer,player);
         if(dealer.getBlackjackWin()){
             return true;
