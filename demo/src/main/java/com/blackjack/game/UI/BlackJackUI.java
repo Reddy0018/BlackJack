@@ -92,7 +92,8 @@ public class BlackJackUI implements ActionListener {
         blackJackJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         blackJackPanel.setLayout(new BorderLayout());
-        blackJackPanel.setBackground(new Color(53,101,77));
+        //blackJackPanel.setBackground(new Color(53,101,77));
+        blackJackPanel.setBackground(Color.white);
         blackJackJFrame.add(blackJackPanel);
 
         dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
@@ -126,7 +127,7 @@ public class BlackJackUI implements ActionListener {
 
     private void showWinMsg(Graphics graphics, String msg){
         graphics.setFont(new Font("Arial",Font.PLAIN,30));
-        graphics.setColor(Color.white);
+        graphics.setColor(Color.BLACK);
         graphics.drawString(msg,220,225);
     }
 
