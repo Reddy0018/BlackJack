@@ -14,12 +14,12 @@ import java.util.Objects;
 
 public class BlackJackUI implements ActionListener {
 
-    private static JFrame blackJackJFrame=null;
+    private static JFrame blackJackJFrame;
     private static JPanel blackJackPanel=null;
     private static List<Player> players = null;
     private static JLabel dealerTotal, playerTotal;
     private static boolean stay = false;
-    private static JButton hitButton, stayButton, startOver;
+    private static JButton hitButton, stayButton, startOver, close;
 
     private static final GameController controller = new GameController();
 
@@ -79,6 +79,10 @@ public class BlackJackUI implements ActionListener {
         startOver.addActionListener(this);
         startOver.setActionCommand("startOver");
 
+        close = new JButton("Close");
+        close.addActionListener(this);
+        close.setActionCommand("close");
+
         stayButton = new JButton("Stay");
         stayButton.addActionListener(this);
         stayButton.setActionCommand("Stay");
@@ -107,6 +111,8 @@ public class BlackJackUI implements ActionListener {
         buttonPanel.add(stayButton);
         startOver.setFocusable(false);
         buttonPanel.add(startOver);
+        close.setFocusable(false);
+        buttonPanel.add(close);
         blackJackJFrame.add(buttonPanel,BorderLayout.SOUTH);
         //dealerCard.forEach(cardObject -> System.out.println(cardObject.cardPath()));
 
@@ -125,6 +131,18 @@ public class BlackJackUI implements ActionListener {
         graphics.drawString(msg,220,225);
     }
 
+    private void setFieldsNull(){
+        blackJackJFrame=null;
+        blackJackPanel=null;
+        players = null;
+        stay=false;
+        hitButton=null;
+        stayButton=null;
+        startOver=null;
+        dealerTotal=null;
+        playerTotal=null;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
@@ -139,19 +157,16 @@ public class BlackJackUI implements ActionListener {
                 buildBlackJackUI();
                 break;
             case "startOver":
-                System.out.println("In start");
                 //controller.startGame();
-                blackJackJFrame=null;
-                blackJackPanel=null;
-                players = null;
-                stay=false;
-                hitButton=null;
-                stayButton=null;
-                startOver=null;
-                dealerTotal=null;
-                playerTotal=null;
-
+                blackJackJFrame.dispose();
+                setFieldsNull();
                 buildBlackJackUI();
+                break;
+            case "close":
+                blackJackJFrame.dispose();
+                Login login = new Login();
+                login.createLoginScreen();
+                setFieldsNull();
                 break;
             default:
                 break;

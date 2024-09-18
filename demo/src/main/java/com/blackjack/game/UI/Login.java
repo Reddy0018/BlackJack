@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Login implements ActionListener {
     private static JLabel userLabel, passwordLabel, success, firstNameLabel, lastNameLabel;
-    private static JButton loginButton, signupButton, signUp, switchToLoginButton;
+    private static JButton loginButton, signupButton, signUp, switchToLoginButton, startGame;
     private static JPasswordField passwordBox;
     private static JTextField userTextBox, firstNameTextBox, lastNameTextBox;
 
@@ -65,6 +65,14 @@ public class Login implements ActionListener {
         signUp.setBounds(90,80,80,25);
         signUp.addActionListener(new Login());
         jPanel.add(signUp);
+
+        // Start game UI
+        startGame = new JButton("Start game");
+        startGame.setBounds(170, 80, 100, 25);
+        startGame.addActionListener(this);
+        startGame.setActionCommand("startGame");
+        startGame.setEnabled(false);
+        jPanel.add(startGame);
 
         success = new JLabel("");
         success.setBounds(10,110,300,25);
@@ -168,6 +176,7 @@ public class Login implements ActionListener {
                     boolean loginStatus = userService.validateLoginDetails(loginRequestMap);
                     if(loginStatus){
                         success.setText("Login Success");
+                        startGame.setEnabled(true);
                         success.setForeground(Color.GREEN);
                     }else {
                         success.setText("User Not Valid");
@@ -204,6 +213,11 @@ public class Login implements ActionListener {
                 break;
             case "SignUp":
                 createSignupScreen();
+                break;
+            case "startGame":
+                jFrame.dispose();
+                BlackJackUI ui = new BlackJackUI();
+                ui.buildBlackJackUI();
                 break;
             default:
                 break;
