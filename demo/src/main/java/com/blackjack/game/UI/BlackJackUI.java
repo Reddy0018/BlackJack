@@ -3,6 +3,7 @@ package com.blackjack.game.UI;
 import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.blackjack.GameController;
 import com.blackjack.game.blackjack.Player;
+import com.blackjack.game.user.UserService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -78,7 +79,7 @@ public class BlackJackUI implements ActionListener {
         startOver.addActionListener(this);
         startOver.setActionCommand("startOver");
 
-        close = new JButton("Close");
+        close = new JButton("Close/Logout");
         close.addActionListener(this);
         close.setActionCommand("close");
 
@@ -167,6 +168,7 @@ public class BlackJackUI implements ActionListener {
                 Login login = new Login();
                 login.createLoginScreen();
                 setFieldsNull();
+                UserService.setActiveUserName(null);
                 break;
             default:
                 break;
