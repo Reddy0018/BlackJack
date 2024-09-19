@@ -162,7 +162,7 @@ public class BlackJack {
             }
         }
         player.setTotal(total);
-        System.out.println("Player Total:: "+ player.getTotal());
+        /**System.out.println("Player Total:: "+ player.getTotal());*/
     }
 
 }

@@ -34,7 +34,6 @@ public class GameController {
         player.setOptions(playerOptions);
         dealer.setOptions(dealerOptions);
         deck = blackJack.buildDeck(deck); /** Building Deck*/
-        System.out.println("Deck:  "+ deck.size());
         return blackJack.BlackJack(player,dealer,deck);
     }
 
