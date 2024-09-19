@@ -211,6 +211,7 @@ public class Login implements ActionListener {
                     System.out.println(ex.getMessage());
                     success.setText(ex.getMessage());
                     success.setForeground(Color.WHITE);
+                    startGame.setEnabled(false);
                 }
                 break;
             case "switchToLogin":
