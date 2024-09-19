@@ -105,8 +105,14 @@ public class BlackJackUI implements ActionListener {
         blackJackPanel.setBackground(Color.white);*/
         blackJackJFrame.add(blackJackPanel);
 
-        dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
-        //dealerTotal.setBounds(10,150,110,80);
+        if(players.get(1).getPlayerCards().get(1).getHidden()){
+            dealerTotal = new JLabel("Dealer Total: "+getCardForDealerCard(players.get(1).getPlayerCards().get(0)));
+        }else {
+            dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
+        }
+
+        /**dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
+        dealerTotal.setBounds(10,150,110,80);*/
         dealerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(dealerTotal,BorderLayout.BEFORE_FIRST_LINE);
 
@@ -129,6 +135,18 @@ public class BlackJackUI implements ActionListener {
 
         blackJackJFrame.setVisible(true);
 
+    }
+
+    private String getCardForDealerCard(CardObject cardObject){
+        if(cardObject.getCardvalue().contains("Queen")||
+                cardObject.getCardvalue().contains("Jack")||
+                cardObject.getCardvalue().contains("King")){
+            return "10";
+        } else if (cardObject.getCardvalue().contains("A")) {
+            return "1/11";
+        } else {
+            return cardObject.getCardvalue();
+        }
     }
 
     public static void main(String[] args) {
