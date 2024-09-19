@@ -19,6 +19,7 @@ public class BlackJackUI implements ActionListener {
     private static List<Player> players = null;
     private static JLabel dealerTotal, playerTotal;
     private static boolean stay = false;
+    private static Image gameBG = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/img.png"))).getImage();
     private static JButton hitButton, stayButton, startOver, close;
 
     private static final GameController controller = new GameController();
@@ -41,6 +42,7 @@ public class BlackJackUI implements ActionListener {
             @Override
             public void paintComponent(Graphics graphics){
                 super.paintComponent(graphics);
+                setBGImg(graphics);
                 /** Show Dealer Cards */
                 for(int i=0; i<dealerCard.size();i++){
                     Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource(dealerCard.get(i).getHidden()? "./cards/BackCard.png":dealerCard.get(i).cardPath()))).getImage();
@@ -70,7 +72,13 @@ public class BlackJackUI implements ActionListener {
             }
         };
 
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(){
+            @Override
+            public void paintComponent(Graphics graphics) {
+                super.paintComponent(graphics);
+                setBGImg(graphics);
+            }
+        };
         hitButton = new JButton("Hit");
         hitButton.addActionListener(this);
         hitButton.setActionCommand("Hit");
@@ -87,22 +95,24 @@ public class BlackJackUI implements ActionListener {
         stayButton.addActionListener(this);
         stayButton.setActionCommand("Stay");
 
-        blackJackJFrame.setSize(600,600);
+        blackJackJFrame.setSize(600,580);
         blackJackJFrame.setLocationRelativeTo(null);
         blackJackJFrame.setResizable(false);
         blackJackJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         blackJackPanel.setLayout(new BorderLayout());
-        //blackJackPanel.setBackground(new Color(53,101,77));
-        blackJackPanel.setBackground(Color.white);
+        /**blackJackPanel.setBackground(new Color(53,101,77));
+        blackJackPanel.setBackground(Color.white);*/
         blackJackJFrame.add(blackJackPanel);
 
         dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
         //dealerTotal.setBounds(10,150,110,80);
+        dealerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(dealerTotal,BorderLayout.BEFORE_FIRST_LINE);
 
         playerTotal = new JLabel("Player Total: "+players.get(0).getTotal());
         //playerTotal.setBounds(180,320,110,80);
+        playerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(playerTotal,BorderLayout.SOUTH);
 
 
@@ -130,6 +140,10 @@ public class BlackJackUI implements ActionListener {
         graphics.setFont(new Font("Arial",Font.PLAIN,30));
         graphics.setColor(Color.BLACK);
         graphics.drawString(msg,220,225);
+    }
+
+    private void setBGImg(Graphics graphics){
+        graphics.drawImage(gameBG, 0, 0, null);
     }
 
     private void setFieldsNull(){

@@ -86,6 +86,7 @@ public class Login implements ActionListener {
 
         success = new JLabel("");
         success.setBounds(10,110,300,25);
+        success.setForeground(Color.WHITE);
         jPanel.add(success);
         jFrame.setVisible(true);
     }
@@ -157,6 +158,7 @@ public class Login implements ActionListener {
 
         success = new JLabel("");
         success.setBounds(10, 200, 500, 25);
+        success.setForeground(Color.WHITE);
         jPanel.add(success);
         jFrame.setVisible(true);
 
@@ -186,7 +188,7 @@ public class Login implements ActionListener {
                 try {
                     if(checkEmpty(loginRequestMap)){
                         success.setText("Fields cannot be empty!");
-                        success.setForeground(Color.RED);
+                        success.setForeground(Color.WHITE);
                         break;
                     }
                     /**if (nameField.getText().isEmpty() || emailField.getText().isEmpty()) {
@@ -198,14 +200,15 @@ public class Login implements ActionListener {
                     if(loginStatus){
                         success.setText("Login Success");
                         startGame.setEnabled(true);
-                        success.setForeground(Color.GREEN);
+                        success.setForeground(Color.WHITE);
                     }else {
                         success.setText("User Not Valid");
-                        success.setForeground(Color.RED);
+                        success.setForeground(Color.WHITE);
                     }
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                     success.setText(ex.getMessage());
+                    success.setForeground(Color.WHITE);
                 }
                 break;
             case "switchToLogin":
@@ -220,16 +223,17 @@ public class Login implements ActionListener {
                 try {
                     if(checkEmpty(signUpRequestMap)){
                         success.setText("Fields cannot be empty!");
-                        success.setForeground(Color.RED);
+                        success.setForeground(Color.WHITE);
                         break;
                     }
                     BeanProvider.autowire(this);
                     userService.validateSignUp(signUpRequestMap);
                     success.setText("Sign UP Success");
-                    success.setForeground(Color.GREEN);
+                    success.setForeground(Color.WHITE);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                     success.setText(ex.getMessage());
+                    success.setForeground(Color.WHITE);
                 }
                 break;
             case "SignUp":
