@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Login implements ActionListener {
     private static JLabel userLabel, passwordLabel, success, firstNameLabel, lastNameLabel;
@@ -32,7 +33,14 @@ public class Login implements ActionListener {
             jFrame.dispose();
         }
         jFrame = new JFrame();
-        jPanel = new JPanel();
+        jPanel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/BlackJack.png"))).getImage();
+                g.drawImage(card, 0, 0, null);
+            }
+        };
 
         //Frame Creation with specific bounds
         jFrame.setSize(350,400);
@@ -41,8 +49,9 @@ public class Login implements ActionListener {
         jPanel.setLayout(null);
 
         // User related UI Code
-        userLabel = new JLabel("User");
+        userLabel = new JLabel("Email");
         userLabel.setBounds(10,20,80,25);
+        userLabel.setForeground(Color.WHITE);
         jPanel.add(userLabel);
         userTextBox = new JTextField(20);
         userTextBox.setBounds(100,20,200,25);
@@ -51,6 +60,7 @@ public class Login implements ActionListener {
         // Password related UI Code
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(10,50,80,25);
+        passwordLabel.setForeground(Color.WHITE);
         jPanel.add(passwordLabel);
         passwordBox = new JPasswordField();
         passwordBox.setBounds(100,50,200,25);
@@ -84,7 +94,14 @@ public class Login implements ActionListener {
         jFrame.dispose();
 
         jFrame = new JFrame();
-        jPanel = new JPanel();
+        jPanel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/BlackJackSignUp.png"))).getImage();
+                g.drawImage(card, 0, 0, null);
+            }
+        };;
         jFrame.setSize(350,400);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(jPanel);
@@ -93,6 +110,7 @@ public class Login implements ActionListener {
         // User related UI Code
         userLabel = new JLabel("Email");
         userLabel.setBounds(10, 20, 80, 25);
+        userLabel.setForeground(Color.WHITE);
         jPanel.add(userLabel);
         userTextBox = new JTextField(20);
         userTextBox.setBounds(100, 20, 200, 25);
@@ -100,6 +118,7 @@ public class Login implements ActionListener {
 
         firstNameLabel = new JLabel("First Name");
         firstNameLabel.setBounds(10, 50, 80, 25);
+        firstNameLabel.setForeground(Color.WHITE);
         jPanel.add(firstNameLabel);
         firstNameTextBox = new JTextField(20);
         firstNameTextBox.setBounds(100, 50, 200, 25);
@@ -107,6 +126,7 @@ public class Login implements ActionListener {
 
         lastNameLabel = new JLabel("Last Name");
         lastNameLabel.setBounds(10, 80, 80, 25);
+        lastNameLabel.setForeground(Color.WHITE);
         jPanel.add(lastNameLabel);
         lastNameTextBox = new JTextField(20);
         lastNameTextBox.setBounds(100, 80, 200, 25);
@@ -115,6 +135,7 @@ public class Login implements ActionListener {
         // Password related UI Code
         passwordLabel = new JLabel("Password");
         passwordLabel.setBounds(10, 110, 80, 25);
+        passwordLabel.setForeground(Color.WHITE);
         jPanel.add(passwordLabel);
         passwordBox = new JPasswordField();
         passwordBox.setBounds(100, 110, 200, 25);
