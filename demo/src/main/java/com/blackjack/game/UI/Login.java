@@ -32,7 +32,8 @@ public class Login implements ActionListener {
         if(null!=jFrame){
             jFrame.dispose();
         }
-        jFrame = new JFrame();
+        jFrame = new JFrame("Login/SignUp");
+        jFrame.setResizable(false);
         jPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
@@ -94,7 +95,8 @@ public class Login implements ActionListener {
     public void createSignupScreen() {
         jFrame.dispose();
 
-        jFrame = new JFrame();
+        jFrame = new JFrame("Login/SignUp");
+        jFrame.setResizable(false);
         jPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g) {
