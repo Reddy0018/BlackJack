@@ -18,11 +18,10 @@ import java.util.Objects;
 public class BlackJackUI implements ActionListener {
 
     private static JFrame blackJackJFrame;
-    private static JPanel blackJackPanel=null;
     private static List<Player> players = null;
     private static JLabel dealerTotal, playerTotal;
     private static boolean stay = false;
-    private static Image gameBG = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/img.png"))).getImage();
+    private final static Image gameBG = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/img.png"))).getImage();
     private static JButton hitButton, stayButton, startOver, close;
 
     private static final GameController controller = new GameController();
@@ -34,7 +33,6 @@ public class BlackJackUI implements ActionListener {
             blackJackJFrame.dispose();
         }
         blackJackJFrame = new JFrame("Black Jack");
-        //blackJackPanel = new JPanel();
 
         if(null==players){
             players =  controller.startGame();
@@ -134,7 +132,6 @@ public class BlackJackUI implements ActionListener {
         jTextArea.setBounds(450,0,270,80);
         blackJackPanel.add(jTextArea,BorderLayout.EAST);
 
-
         hitButton.setFocusable(false);
         buttonPanel.add(hitButton);
         stayButton.setFocusable(false);
@@ -144,8 +141,6 @@ public class BlackJackUI implements ActionListener {
         close.setFocusable(false);
         buttonPanel.add(close);
         blackJackJFrame.add(buttonPanel,BorderLayout.SOUTH);
-        //dealerCard.forEach(cardObject -> System.out.println(cardObject.cardPath()));
-
         blackJackJFrame.setVisible(true);
 
     }
@@ -179,7 +174,6 @@ public class BlackJackUI implements ActionListener {
 
     private void setFieldsNull(){
         blackJackJFrame=null;
-        blackJackPanel=null;
         players = null;
         stay=false;
         hitButton=null;

@@ -16,7 +16,6 @@ public class Interceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
                              Object handler) throws Exception {
-        System.out.println("Inside Pre Handle request: ");
         if(null== UserService.getActiveUserName()){
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setCharacterEncoding("UTF-8");
