@@ -104,7 +104,7 @@ public class Login implements ActionListener {
                 Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/BlackJackSignUp.png"))).getImage();
                 g.drawImage(card, 0, 0, null);
             }
-        };;
+        };
         jFrame.setSize(350,400);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(jPanel);
@@ -186,7 +186,7 @@ public class Login implements ActionListener {
             case "Login":
                 Map<String,String> loginRequestMap = new HashMap<>();
                 loginRequestMap.put("email",userTextBox.getText());
-                loginRequestMap.put("password",passwordBox.getText());
+                loginRequestMap.put("password",String.valueOf(passwordBox.getPassword()));
                 try {
                     if(checkEmpty(loginRequestMap)){
                         success.setText("Fields cannot be empty!");
@@ -220,7 +220,7 @@ public class Login implements ActionListener {
             case "Sign Up":
                 Map<String,String> signUpRequestMap = new HashMap<>();
                 signUpRequestMap.put("email",userTextBox.getText());
-                signUpRequestMap.put("password",passwordBox.getText());
+                signUpRequestMap.put("password",String.valueOf(passwordBox.getPassword()));
                 signUpRequestMap.put("firstName",firstNameTextBox.getText());
                 signUpRequestMap.put("lastName",lastNameTextBox.getText());
                 try {
