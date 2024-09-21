@@ -54,6 +54,8 @@ public class UserService {
             user.setFirstName(map.get("firstName"));
             user.setLastName(map.get("lastName"));
             user.setPassword(map.get("password"));
+            user.setTotalWins(0);
+            user.setTotalLosses(0);
             userRepository.save(user);
 
             return user;
@@ -74,5 +76,9 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public User getActiveLoggedInUser(){
+        return user;
     }
 }

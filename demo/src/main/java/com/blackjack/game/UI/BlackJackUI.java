@@ -3,7 +3,10 @@ package com.blackjack.game.UI;
 import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.blackjack.GameController;
 import com.blackjack.game.blackjack.Player;
+import com.blackjack.game.user.User;
+import com.blackjack.game.user.UserController;
 import com.blackjack.game.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +26,8 @@ public class BlackJackUI implements ActionListener {
     private static JButton hitButton, stayButton, startOver, close;
 
     private static final GameController controller = new GameController();
+    @Autowired
+    private UserController userController;
 
     public  void buildBlackJackUI(){
         if(null!=blackJackJFrame){
@@ -95,7 +100,7 @@ public class BlackJackUI implements ActionListener {
         stayButton.addActionListener(this);
         stayButton.setActionCommand("Stay");
 
-        blackJackJFrame.setSize(600,580);
+        blackJackJFrame.setSize(720,580);
         blackJackJFrame.setLocationRelativeTo(null);
         blackJackJFrame.setResizable(false);
         blackJackJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,6 +125,14 @@ public class BlackJackUI implements ActionListener {
         //playerTotal.setBounds(180,320,110,80);
         playerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(playerTotal,BorderLayout.SOUTH);
+
+        BeanProvider.autowire(this);
+        User user=userController.getLoggenInUser();
+        JTextArea jTextArea = new JTextArea("User Email: "+ user.getEmail() +"\n"+ "Player Total Wins: "+user.getTotalWins()+"\n"+"Player Total Busts: "+user.getTotalLosses());
+        jTextArea.setOpaque(false);
+        jTextArea.setForeground(Color.WHITE);
+        jTextArea.setBounds(450,0,270,80);
+        blackJackPanel.add(jTextArea,BorderLayout.EAST);
 
 
         hitButton.setFocusable(false);
@@ -156,7 +169,7 @@ public class BlackJackUI implements ActionListener {
 
     private void showWinMsg(Graphics graphics, String msg){
         graphics.setFont(new Font("Arial",Font.PLAIN,30));
-        graphics.setColor(Color.BLACK);
+        graphics.setColor(Color.WHITE);
         graphics.drawString(msg,220,225);
     }
 

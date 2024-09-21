@@ -31,6 +31,11 @@ public class User {
     @JsonIgnore
     @Column(nullable = false)
     private String password;
+    @Column(name = "total_wins",nullable = true)
+    private Integer totalWins;
+    @Column(name = "total_losses",nullable = true)
+    private Integer totalLosses;
+
     /**@JsonIgnore
     @Column
     private String salt;*/
@@ -73,5 +78,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getTotalWins() {
+        return totalWins;
+    }
+
+    public void setTotalWins(int totalWins) {
+        this.totalWins = totalWins;
+    }
+
+    public int getTotalLosses() {
+        return totalLosses;
+    }
+
+    public void setTotalLosses(int totalLosses) {
+        this.totalLosses = totalLosses;
     }
 }

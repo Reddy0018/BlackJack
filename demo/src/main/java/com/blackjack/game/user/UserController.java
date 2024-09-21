@@ -58,7 +58,6 @@ public class UserController {
 
     @GetMapping(path = "/getUsers")
     public List<User> getAllUsers(){
-        System.out.println("In---");
         return userService.getAllUsers();
     }
 
@@ -66,5 +65,10 @@ public class UserController {
     public String logout(){
         UserService.setActiveUserName(null);
         return "Logout Successful";
+    }
+
+    @GetMapping(path = "/getLoggedInUser")
+    public User getLoggenInUser(){
+        return userService.getActiveLoggedInUser();
     }
 }

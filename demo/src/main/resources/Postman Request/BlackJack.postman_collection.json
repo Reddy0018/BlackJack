@@ -79,7 +79,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"sxb1454\",\n    \"password\":\"12345\"\n}",
+					"raw": "{\n    \"email\":\"sxb1454@case.edu\",\n    \"password\":\"12345\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -109,7 +109,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"sxb1454@case.edu\",\n    \"password\":\"12345\",\n    \"firstName\":\"Sumanth Reddy\",\n    \"lastName\":\"Bekkem\"\n}",
+					"raw": "{\n    \"email\":\"axc1454\",\n    \"password\":\"12345\",\n    \"firstName\":\"Alex\",\n    \"lastName\":\"Cooper\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,7 +139,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"sxb1454@case.edu\"\n}",
+					"raw": "{\n    \"email\":\"11\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -199,6 +199,27 @@
 						"loginApi",
 						"v1",
 						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLoggedInUser",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/loginApi/v1/getLoggedInUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"loginApi",
+						"v1",
+						"getLoggedInUser"
 					]
 				}
 			},

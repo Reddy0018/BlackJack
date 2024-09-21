@@ -1,8 +1,19 @@
 package com.blackjack.game.blackjack;
 
+import com.blackjack.game.UI.BeanProvider;
+import com.blackjack.game.user.User;
+import com.blackjack.game.user.UserRepository;
+import com.blackjack.game.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.*;
 
 public class BlackJack {
+
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private UserService userService;
 
     public List<Player> BlackJack(Player player, Player dealer, Stack<CardObject> deck) {
         //Shuffling the building deck
@@ -48,26 +59,42 @@ public class BlackJack {
         return deck;
     }
 
+    private void updateUserWinORLoss(String action){
+        BeanProvider.autowire(this);
+        User user = userService.getActiveLoggedInUser();
+        if(action.equals("Loss")){
+            user.setTotalLosses(user.getTotalLosses()+1);
+            userRepository.save(user);
+            return;
+        }
+        user.setTotalWins(user.getTotalWins()+1);
+        userRepository.save(user);
+    }
+
     public boolean dealerPlayFunction(Player player, Player dealer, Stack<CardObject> deck){
 
         dealer.getPlayerCards().get(1).setHidden(false);
         if(player.getBustFlag()){
+            updateUserWinORLoss("Loss");
             return true;
         }
         calculateBlackJackStatus(dealer,player);
         if(dealer.getBlackjackWin()){
+            updateUserWinORLoss("Loss");
             return true;
         }
         if(player.getTotal()==21){
             player.setWinFlag(true);
             dealer.setWinFlag(false);
             dealer.setBustFlag(true);
+            updateUserWinORLoss("W");
             return  true;
         }else if (dealer.getTotal()>player.getTotal()){
             player.setWinFlag(false);
             dealer.setWinFlag(true);
             player.setBustFlag(true);
             dealer.setBustFlag(false);
+            updateUserWinORLoss("Loss");
             return true;
         }
 
@@ -82,6 +109,7 @@ public class BlackJack {
                 dealer.setBustFlag(true);
                 dealer.setWinFlag(false);
                 player.setWinFlag(true);
+                updateUserWinORLoss("W");
                 return true;
         }
 
@@ -92,11 +120,13 @@ public class BlackJack {
             calculateCardsTotalValue(dealer);
             if(dealer.getTotal()>21){
                 calculatePlayerBustStatus(dealer,player);
+                updateUserWinORLoss("W");
                 break;
             }else if (dealer.getTotal()>player.getTotal()){
                 dealer.setWinFlag(true);
                 player.setBustFlag(true);
                 player.setWinFlag(false);
+                updateUserWinORLoss("Loss");
                 break;
             }else if (dealer.getTotal() == player.getTotal()){
                 dealer.setGameDraw(true);
