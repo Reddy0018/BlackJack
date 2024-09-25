@@ -1,10 +1,12 @@
 package com.blackjack.game.UI;
 
+import com.blackjack.game.blackjack.BlackJack;
 import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.blackjack.GameController;
 import com.blackjack.game.blackjack.Player;
 import com.blackjack.game.user.User;
 import com.blackjack.game.user.UserController;
+import com.blackjack.game.user.UserRepository;
 import com.blackjack.game.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,8 @@ public class BlackJackUI implements ActionListener {
     private static final GameController controller = new GameController();
     @Autowired
     private UserController userController;
+    @Autowired
+    private UserRepository userRepository;
 
     public  void buildBlackJackUI(){
         if(null!=blackJackJFrame){
@@ -74,6 +78,13 @@ public class BlackJackUI implements ActionListener {
                 }
             }
         };
+
+        if(players.get(0).getBlackjackWin()){
+            User user = userController.getLoggenInUser();
+            System.out.println(user);
+            user.setTotalWins(user.getTotalWins()+1);
+            userRepository.save(user);
+        }
 
         JPanel buttonPanel = new JPanel(){
             @Override
@@ -142,7 +153,6 @@ public class BlackJackUI implements ActionListener {
         buttonPanel.add(close);
         blackJackJFrame.add(buttonPanel,BorderLayout.SOUTH);
         blackJackJFrame.setVisible(true);
-
     }
 
     private String getCardForDealerCard(CardObject cardObject){
