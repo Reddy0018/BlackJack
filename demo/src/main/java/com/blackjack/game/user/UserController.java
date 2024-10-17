@@ -71,4 +71,9 @@ public class UserController {
     public User getLoggenInUser(){
         return userService.getActiveLoggedInUser();
     }
+
+    /**@GetMapping(path = "/sendEmail")
+    public String sendEmail(@RequestBody Map<String,String> map){
+        return userService.sendEmailRequest(map.get("email"));
+    }*/
 }

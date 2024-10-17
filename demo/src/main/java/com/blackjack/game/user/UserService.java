@@ -6,19 +6,24 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Setter
     private User user = null;
 
     public UserService(){
         BeanProvider.autowire(this);
     }
-
 
     @Getter
     @Setter
@@ -81,4 +86,34 @@ public class UserService {
     public User getActiveLoggedInUser(){
         return user;
     }
+
+/**    public String sendEmailRequest(String email) {
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true");
+        prop.put("mail.smtp.host", "sandbox.smtp.mailtrap.io");
+        prop.put("mail.smtp.port", "25");
+        prop.put("mail.smtp.ssl.trust", "sandbox.smtp.mailtrap.io");
+        prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+        Session session = Session.getDefaultInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("sumanthr4179@gmail.com","bqxsrigpxzguasfc");
+            }
+        });
+        Message msg = new MimeMessage(session);
+        try {
+            msg.setFrom(new InternetAddress(email));
+            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            msg.setSubject("Password Reset Code!");
+            msg.setText("Dummy Code");
+
+            Transport.send(msg);
+        } catch (AddressException e) {
+            throw new RuntimeException(e);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }*/
 }

@@ -2,9 +2,13 @@ package com.blackjack.game.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")

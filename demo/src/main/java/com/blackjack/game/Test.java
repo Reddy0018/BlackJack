@@ -1,35 +1,25 @@
 package com.blackjack.game;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
 public class Test {
 
-    public static void main(String[] args) {
-
-        JFrame f = new JFrame("A JFrame");
-        f.setSize(250, 250);
-        f.setLocation(300,200);
-        final JTextArea textArea = new JTextArea(10, 40);
-        f.getContentPane().add(BorderLayout.CENTER, textArea);
-        final JButton button = new JButton("Click Me");
-        f.getContentPane().add(BorderLayout.SOUTH, button);
-        button.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textArea.append("Button was clicked\n");
-
+    public static void partition(int[] A, int odd, int even) {
+        int[] B = new int[8];
+        for(int i=0;i<A.length;i++){
+            if(A[i]<0){
+                B[odd]=A[i];
+                odd+=2;
+            }else {
+                B[even]=A[i];
+                even+=2;
             }
-        });
-
-        f.setVisible(true);
-
+        }
+        for(int i=0;i<B.length;i++){
+            System.out.print(B[i]);
+        }
     }
 
+    public static void main(String[] args) {
+        int[] A ={-1,7,5,-3,8,4,-1,-6};
+        partition(A,0,1);
+    }
 }
