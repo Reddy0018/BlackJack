@@ -96,4 +96,30 @@ public class GameController {
         return Arrays.asList(player,dealer);
     }
 
+    @GetMapping(path = "startGuestGame")
+    public List<Player> startGuestGame(){
+        blackJack = new BlackJack();
+
+        player = new player("Guest", true);
+        playerOptions = new OptionsEnableClass();
+
+        dealer = new Player("Dealer", false);
+        dealerOptions = new OptionsEnableClass();
+
+        player.setOptions(playerOptions);
+        dealer.setOptions(dealerOptions);
+        deck = blackJack.buildDeck(deck);
+        return blackJack.BlackJack(player, dealer, deck);
+            
+    }
+
+    @GetMapping(path = "endGuestSession")
+    public String endGuestSession(){
+        if(player.isGuest()){
+            player = null;
+            return "Guest session ended, all stats discarded";
+        }
+        return "No Guest session to end";
+    }
+
 }
