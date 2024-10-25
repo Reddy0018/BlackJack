@@ -102,7 +102,7 @@ public class Player {
     }
 
     public Player(String name, Boolean guest){
-        this.playerNName = name;
+        this.playerName = name;
         this.guest = guest;
     }
 
