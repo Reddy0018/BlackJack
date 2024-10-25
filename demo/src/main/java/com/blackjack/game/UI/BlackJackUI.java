@@ -25,6 +25,7 @@ public class BlackJackUI implements ActionListener {
     private static boolean stay = false;
     private final static Image gameBG = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/img.png"))).getImage();
     private static JButton hitButton, stayButton, startOver, close;
+    private boolean isGuest = false;
 
     private static final GameController controller = new GameController();
     @Autowired
@@ -32,6 +33,15 @@ public class BlackJackUI implements ActionListener {
     @Autowired
     private UserRepository userRepository;
 
+    public BlackJackUI(boolean isGuest){
+        this.isGuest = isGuest;
+        buildBlackJackUI();
+    }
+
+    public BlackJackUI(){
+        this(false);
+    }
+    
     public  void buildBlackJackUI(){
         if(null!=blackJackJFrame){
             blackJackJFrame.dispose();
@@ -79,7 +89,7 @@ public class BlackJackUI implements ActionListener {
             }
         };
 
-        if(players.get(0).getBlackjackWin()){
+        if(players.get(0).getBlackjackWin() && !isGuest){
             User user = userController.getLoggenInUser();
             System.out.println(user);
             user.setTotalWins(user.getTotalWins()+1);
@@ -135,14 +145,16 @@ public class BlackJackUI implements ActionListener {
         playerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(playerTotal,BorderLayout.SOUTH);
 
-        BeanProvider.autowire(this);
-        User user=userController.getLoggenInUser();
-        JTextArea jTextArea = new JTextArea("User Email: "+ user.getEmail() +"\n"+ "Player Total Wins: "+user.getTotalWins()+"\n"+"Player Total Busts: "+user.getTotalLosses());
-        jTextArea.setOpaque(false);
-        jTextArea.setForeground(Color.WHITE);
-        jTextArea.setBounds(450,0,270,80);
-        blackJackPanel.add(jTextArea,BorderLayout.EAST);
-
+        if(!isGuest){
+            BeanProvider.autowire(this);
+            User user=userController.getLoggenInUser();
+            JTextArea jTextArea = new JTextArea("User Email: "+ user.getEmail() +"\n"+ "Player Total Wins: "+user.getTotalWins()+"\n"+"Player Total Busts: "+user.getTotalLosses());
+            jTextArea.setOpaque(false);
+            jTextArea.setForeground(Color.WHITE);
+            jTextArea.setBounds(450,0,270,80);
+            blackJackPanel.add(jTextArea,BorderLayout.EAST);
+        }
+        
         hitButton.setFocusable(false);
         buttonPanel.add(hitButton);
         stayButton.setFocusable(false);
