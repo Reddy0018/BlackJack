@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class Login implements ActionListener {
     private static JLabel userLabel, passwordLabel, success, firstNameLabel, lastNameLabel;
-    private static JButton loginButton, signupButton, signUp, switchToLoginButton, startGame;
+    private static JButton loginButton, signupButton, guestButton, signUp, switchToLoginButton, startGame;
     private static JPasswordField passwordBox;
     private static JTextField userTextBox, firstNameTextBox, lastNameTextBox;
 
@@ -87,6 +87,18 @@ public class Login implements ActionListener {
 
         success = new JLabel("");
         success.setBounds(10,110,300,25);
+        success.setForeground(Color.WHITE);
+        jPanel.add(success);
+        jFrame.setVisible(true);
+
+        guestButton = new JButton("Play as Guest");
+        guestButton.setBounds(170, 110, 120, 25);
+        guestButton.addActionListener(this);
+        guestButton.setActionCommand("guestPlay");
+        jPanel.add(guestButton);
+
+        success = new JLabel("");
+        success.setBounds(10,140,300,25);
         success.setForeground(Color.WHITE);
         jPanel.add(success);
         jFrame.setVisible(true);
@@ -247,6 +259,9 @@ public class Login implements ActionListener {
                 BlackJackUI ui = new BlackJackUI();
                 ui.buildBlackJackUI();
                 break;
+            case "guestPlay":
+                jFrame.dispose();
+                BlackJackUI guestUI = new BlackJackUI(true);
             default:
                 break;
         }
