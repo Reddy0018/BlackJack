@@ -13,6 +13,7 @@ public class Player {
     private OptionsEnableClass options = null;
     private Boolean blackjackWin = false;
     private Boolean gameDraw = false;
+    private Boolean guest = false;
 
     public Boolean getGameDraw() {
         return gameDraw;
@@ -98,5 +99,18 @@ public class Player {
 
     public void setWinFlag(Boolean winFlag) {
         this.winFlag = winFlag;
+    }
+
+    public Player(String name, Boolean guest){
+        this.playerNName = name;
+        this.guest = guest;
+    }
+
+    public Boolean isGuest(){
+        return guest;
+    }
+
+    public void setGuest(Boolean guest){
+        this.guest = guest;
     }
 }
