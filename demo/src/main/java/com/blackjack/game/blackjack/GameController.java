@@ -100,7 +100,7 @@ public class GameController {
     public List<Player> startGuestGame(){
         blackJack = new BlackJack();
 
-        player = new player("Guest", true);
+        player = new Player("Guest", true);
         playerOptions = new OptionsEnableClass();
 
         dealer = new Player("Dealer", false);
