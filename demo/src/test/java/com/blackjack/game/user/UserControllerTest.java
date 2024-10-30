@@ -100,8 +100,11 @@ public class UserControllerTest {
 
     @Test
     void logout() {
+        when(userService.getActiveLoggedInUser()).thenReturn(new User());
         Assertions.assertEquals(userController.logout(),"Logout Successful");
         Assertions.assertNull(UserService.getActiveUserName());
+        when(userService.getActiveLoggedInUser()).thenReturn(null);
+        Assertions.assertEquals(userController.logout(),"No Active LoggedIn User");
     }
 
     @Test
