@@ -6,18 +6,15 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.*;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private Encryption encryption;
     @Setter
     private User user = null;
 
@@ -37,7 +34,7 @@ public class UserService {
             if(null==user){
                 throw new Exception("User Not Found!");
             }
-            String decryptedText = Encryption.decrypt(user.getPassword());
+            String decryptedText = encryption.decrypt(user.getPassword());
             if(password.equals(decryptedText)){
                 activeUserName = user.getFirstName()+","+user.getLastName();
                 return true;
@@ -59,7 +56,7 @@ public class UserService {
             user.setEmail(map.get("email"));
             user.setFirstName(map.get("firstName"));
             user.setLastName(map.get("lastName"));
-            user.setPassword(Encryption.encrypt(map.get("password")));
+            user.setPassword(encryption.encrypt(map.get("password")));
             user.setTotalWins(0);
             user.setTotalLosses(0);
             userRepository.save(user);

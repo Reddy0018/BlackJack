@@ -25,46 +25,53 @@ class UserServiceTest {
     @MockBean
     private UserRepository userRepository;
 
+    @MockBean
+    private Encryption encryption;
+
     @Autowired
     private UserService userService;
 
     private User user;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
         user = new User();
         user.setEmail("sxb1454@case.edu");
-        user.setPassword("12345");
+        //user.setPassword("12345");
+        user.setPassword(encryption.encrypt("password123"));
         user.setFirstName("Sumanth Reddy");
         user.setLastName("Bekkem");
     }
 
     @Test
-    void validateLoginDetails() {
+    void validateLoginDetails() throws Exception {
         Map<String, String> loginDetails = new HashMap<>();
         loginDetails.put("email", "sxb1454@case.edu");
-        loginDetails.put("password", "12345");
+        loginDetails.put("password", "12345");//CYYW/vhCK3gjS1ehUkeY4A==
 
         /** Success Scenario*/
-        when(userRepository.findByEmail(anyString())).thenReturn(user);
+        when(userRepository.findByEmail("sxb1454@case.edu")).thenReturn(user);
+        when(encryption.decrypt(user.getPassword())).thenReturn("12345");
         boolean result = userService.validateLoginDetails(loginDetails);
         assertTrue(result);
         assertEquals("Sumanth Reddy,Bekkem", UserService.getActiveUserName());
 
-        /** Wrong Password Scenario*/
+        /** Wrong Password Scenario */
         user.setPassword("1");
-        RuntimeException exception = assertThrows(RuntimeException.class,()->userService.validateLoginDetails(loginDetails));
+        user.setPassword(encryption.encrypt("wrongpassword"));
+        when(encryption.decrypt(user.getPassword())).thenReturn("wrongpassword");
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> userService.validateLoginDetails(loginDetails));
         assertEquals("Password didn't match!", exception.getMessage());
 
         /** Null User Scenario */
-        when(userRepository.findByEmail(anyString())).thenReturn(null);
-        exception = assertThrows(RuntimeException.class,()->userService.validateLoginDetails(loginDetails));
+        when(userRepository.findByEmail("sxb1454@case.edu")).thenReturn(null);
+        exception = assertThrows(RuntimeException.class, () -> userService.validateLoginDetails(loginDetails));
         assertEquals("User Not Found!", exception.getMessage());
     }
 
     @Test
-    public void validateSignUp() {
+    public void validateSignUp() throws Exception {
         Map<String, String> signUpDetails = new HashMap<>();
         signUpDetails.put("email", "sxb1454@case.edu");
         signUpDetails.put("firstName", "Sumanth Reddy");
@@ -74,6 +81,7 @@ class UserServiceTest {
         /** Success Scenario */
         when(userRepository.findByEmail("newuser@example.com")).thenReturn(null);
         when(userRepository.save(any(User.class))).thenReturn(user);
+        when(encryption.encrypt(anyString())).thenReturn("password");
         User result = userService.validateSignUp(signUpDetails);
 
         assertNotNull(result);
