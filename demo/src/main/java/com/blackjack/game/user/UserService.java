@@ -37,7 +37,8 @@ public class UserService {
             if(null==user){
                 throw new Exception("User Not Found!");
             }
-            if(user.getPassword().equals(password)){
+            String decryptedText = Encryption.decrypt(user.getPassword());
+            if(password.equals(decryptedText)){
                 activeUserName = user.getFirstName()+","+user.getLastName();
                 return true;
             }else {
@@ -58,7 +59,7 @@ public class UserService {
             user.setEmail(map.get("email"));
             user.setFirstName(map.get("firstName"));
             user.setLastName(map.get("lastName"));
-            user.setPassword(map.get("password"));
+            user.setPassword(Encryption.encrypt(map.get("password")));
             user.setTotalWins(0);
             user.setTotalLosses(0);
             userRepository.save(user);
