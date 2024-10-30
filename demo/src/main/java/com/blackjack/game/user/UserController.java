@@ -63,6 +63,9 @@ public class UserController {
 
     @GetMapping(path = "/logout")
     public String logout(){
+        if(null==userService.getActiveLoggedInUser()){
+            return "No Active LoggedIn User";
+        }
         UserService.setActiveUserName(null);
         return "Logout Successful";
     }
