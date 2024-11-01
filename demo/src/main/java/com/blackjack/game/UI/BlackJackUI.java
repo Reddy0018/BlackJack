@@ -1,6 +1,5 @@
 package com.blackjack.game.UI;
 
-import com.blackjack.game.blackjack.BlackJack;
 import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.blackjack.GameController;
 import com.blackjack.game.blackjack.Player;
@@ -52,12 +51,14 @@ public class BlackJackUI implements ActionListener {
                 setBGImg(graphics);
                 /** Show Dealer Cards */
                 for(int i=0; i<dealerCard.size();i++){
-                    Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource(dealerCard.get(i).getHidden()? "./cards/BackCard.png":dealerCard.get(i).cardPath()))).getImage();
+                    Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource(dealerCard
+                            .get(i).getHidden()? "./cards/BackCard.png":dealerCard.get(i).cardPath()))).getImage();
                     graphics.drawImage(card,20 + (110+5)*i,20,110,154,null);
                 }
                 /** Show Player Cards */
                 for(int i=0; i<playerCards.size();i++){
-                    Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource(playerCards.get(i).cardPath()))).getImage();
+                    Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource(playerCards
+                            .get(i).cardPath()))).getImage();
                     graphics.drawImage(card,20 +  (110+5)*i,320,110,154,null);
                 }
 
@@ -120,7 +121,8 @@ public class BlackJackUI implements ActionListener {
         blackJackJFrame.add(blackJackPanel);
 
         if(players.get(1).getPlayerCards().get(1).getHidden()){
-            dealerTotal = new JLabel("Dealer Total: "+getCardForDealerCard(players.get(1).getPlayerCards().get(0)));
+            dealerTotal = new JLabel("Dealer Total: "+getCardForDealerCard(players
+                    .get(1).getPlayerCards().get(0)));
         }else {
             dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
         }

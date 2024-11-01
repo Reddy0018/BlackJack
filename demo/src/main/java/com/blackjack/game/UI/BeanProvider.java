@@ -9,6 +9,9 @@ public class BeanProvider {
     private static ApplicationContext applicationContext;
 
     public static void autowire(Object object) {
+        if (applicationContext == null) {
+            throw new IllegalStateException("ApplicationContext not initialized");
+        }
         applicationContext.getAutowireCapableBeanFactory().autowireBean(object);
     }
 

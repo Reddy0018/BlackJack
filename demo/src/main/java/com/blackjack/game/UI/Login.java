@@ -38,7 +38,8 @@ public class Login implements ActionListener {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/BlackJack.png"))).getImage();
+                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class
+                        .getResource("./cards/BlackJack.png"))).getImage();
                 g.drawImage(card, 0, 0, null);
             }
         };
@@ -48,6 +49,7 @@ public class Login implements ActionListener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(jPanel);
         jPanel.setLayout(null);
+        jFrame.setLocationRelativeTo(null);
 
         // User related UI Code
         userLabel = new JLabel("Email");
@@ -101,7 +103,8 @@ public class Login implements ActionListener {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class.getResource("./cards/BlackJackSignUp.png"))).getImage();
+                Image card = new ImageIcon(Objects.requireNonNull(BlackJackUI.class
+                        .getResource("./cards/BlackJackSignUp.png"))).getImage();
                 g.drawImage(card, 0, 0, null);
             }
         };
@@ -109,6 +112,7 @@ public class Login implements ActionListener {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(jPanel);
         jPanel.setLayout(null);
+        jFrame.setLocationRelativeTo(null);
 
         // User related UI Code
         userLabel = new JLabel("Email");
