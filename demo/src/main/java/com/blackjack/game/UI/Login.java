@@ -1,6 +1,7 @@
 package com.blackjack.game.UI;
 
 import com.blackjack.game.user.UserService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
@@ -12,9 +13,13 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Login implements ActionListener {
+    @Getter
     private static JLabel userLabel, passwordLabel, success, firstNameLabel, lastNameLabel;
+    @Getter
     private static JButton loginButton, signupButton, signUp, switchToLoginButton, startGame;
+    @Getter
     private static JPasswordField passwordBox;
+    @Getter
     private static JTextField userTextBox, firstNameTextBox, lastNameTextBox;
 
     private static JFrame jFrame=null;
@@ -95,7 +100,9 @@ public class Login implements ActionListener {
     }
 
     public void createSignupScreen() {
-        jFrame.dispose();
+        if(null!=jFrame){
+            jFrame.dispose();
+        }
 
         jFrame = new JFrame("Login/SignUp");
         jFrame.setResizable(false);
