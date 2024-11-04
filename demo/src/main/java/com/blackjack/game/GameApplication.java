@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("com.*")
 public class GameApplication {
 
-	private static final Login login = new Login();
+	private static Login login = createLogin();
 
 	public static void main(String[] args) {
 		System.out.println("Test");
@@ -20,5 +20,11 @@ public class GameApplication {
 		SpringApplication.run(GameApplication.class, args);
 	}
 
+	protected static void setLogin(Login loginInstance) {
+		login = loginInstance;
+	}
 
+	protected static Login createLogin() {
+		return new Login();
+	}
 }
