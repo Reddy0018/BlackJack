@@ -1,6 +1,8 @@
 package com.blackjack.game.blackjack;
 
 import com.blackjack.game.user.UserService;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +14,9 @@ import java.util.*;
 public class GameController {
 
     private BlackJack blackJack = null;
+    @Getter
     private Stack<CardObject> deck;
+    @Setter
     private Player player = null;
     private OptionsEnableClass playerOptions = null;
     private Player dealer = null;
@@ -62,14 +66,24 @@ public class GameController {
         blackJack.calculateCardsTotalValue(player);
         blackJack.calculatePlayerBustStatus(player, dealer);
         //blackJack.calculateBlackJackStatus(player, dealer);
+        /**if(player.getTotal()==21){
+            player.getOptions().setEnableHitButton(false);
+            player.getOptions().setEnableStandButton(false);
+            player.setWinFlag(true);
+            dealer.setBustFlag(true);
+        }*/
+        setOptions(player);
+
+        return Arrays.asList(player,dealer);
+    }
+
+    public void setOptions(Player player){
         if(player.getTotal()==21){
             player.getOptions().setEnableHitButton(false);
             player.getOptions().setEnableStandButton(false);
             player.setWinFlag(true);
             dealer.setBustFlag(true);
         }
-
-        return Arrays.asList(player,dealer);
     }
 
     @GetMapping(path = "/playerHitStand")
