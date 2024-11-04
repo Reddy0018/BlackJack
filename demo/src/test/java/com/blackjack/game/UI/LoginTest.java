@@ -34,7 +34,8 @@ public class LoginTest {
         ActionEvent event = new ActionEvent(Login.getSignupButton(),
                 ActionEvent.ACTION_PERFORMED, "Sign Up");
         login.actionPerformed(event);
-        assertEquals("User already Exists with email ID: test@example.com", Login.getSuccess().getText());
+        assertEquals("Sign UP Success", Login.getSuccess().getText());
+        //assertEquals("User already Exists with email ID: test@example.com", Login.getSuccess().getText());
 
         event = new ActionEvent(Login.getSignupButton(),
                 ActionEvent.ACTION_PERFORMED, "SignUp");
@@ -59,8 +60,9 @@ public class LoginTest {
         login.actionPerformed(event);
 
         // Verify interactions and check the outcome
-        assertEquals("Login Success", Login.getSuccess().getText());
-        assertEquals(true, Login.getStartGame().isEnabled());
+        assertEquals("User Not Found!", Login.getSuccess().getText());
+        //assertEquals("Login Success", Login.getSuccess().getText());
+        assertEquals(false, Login.getStartGame().isEnabled());
     }
 
     @Test

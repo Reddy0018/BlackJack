@@ -1,11 +1,8 @@
 package com.blackjack.game.blackjack;
 
-import lombok.Generated;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Generated
 public class Player {
     private String playerName;
     int bet=100;

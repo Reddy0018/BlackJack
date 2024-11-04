@@ -10,7 +10,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@Generated
 public class User {
     @SequenceGenerator(name = "user_seq", sequenceName = "user_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")

@@ -1,8 +1,6 @@
 package com.blackjack.game.blackjack;
 
-import lombok.Generated;
 
-@Generated
 public class OptionsEnableClass {
     private Boolean enableHitButton =true;
     private Boolean enableStandButton = true;
