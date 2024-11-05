@@ -1,12 +1,15 @@
 package com.blackjack.game.UI;
 
+import com.blackjack.game.blackjack.CardObject;
 import com.blackjack.game.user.User;
 import com.blackjack.game.user.UserController;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 import static org.mockito.Mockito.*;
@@ -15,6 +18,9 @@ import static org.mockito.Mockito.*;
 class BlackJackUITest {
 
     BlackJackUI blackJackUI = new BlackJackUI();
+
+    @Mock
+    Graphics graphics;
 
     @MockBean
     UserController userController;
@@ -30,5 +36,18 @@ class BlackJackUITest {
         blackJackUI.actionPerformed(event);
         event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "default");
         blackJackUI.actionPerformed(event);
+    }
+
+    @Test
+    void getCardForDealerCardTest(){
+        blackJackUI.getCardForDealerCard(new CardObject("Acs","King"));
+        blackJackUI.getCardForDealerCard(new CardObject("Acs","Jack"));
+        blackJackUI.getCardForDealerCard(new CardObject("Acs","Queen"));
+        blackJackUI.getCardForDealerCard(new CardObject("Acs","Ace"));
+        blackJackUI.getCardForDealerCard(new CardObject("Acs","1"));
+
+        blackJackUI.showWinMsg(graphics,"Test");
+        blackJackUI.setBGImg(graphics);
+        blackJackUI.setFieldsNull();
     }
 }

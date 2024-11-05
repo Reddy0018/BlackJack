@@ -157,7 +157,7 @@ public class BlackJackUI implements ActionListener {
         blackJackJFrame.setVisible(true);
     }
 
-    private String getCardForDealerCard(CardObject cardObject){
+    public String getCardForDealerCard(CardObject cardObject){
         if(cardObject.getCardvalue().contains("Queen")||
                 cardObject.getCardvalue().contains("Jack")||
                 cardObject.getCardvalue().contains("King")){
@@ -169,17 +169,17 @@ public class BlackJackUI implements ActionListener {
         }
     }
 
-    private void showWinMsg(Graphics graphics, String msg){
+    public void showWinMsg(Graphics graphics, String msg){
         graphics.setFont(new Font("Arial",Font.PLAIN,30));
         graphics.setColor(Color.WHITE);
         graphics.drawString(msg,220,225);
     }
 
-    private void setBGImg(Graphics graphics){
+    public void setBGImg(Graphics graphics){
         graphics.drawImage(gameBG, 0, 0, null);
     }
 
-    private void setFieldsNull(){
+    public void setFieldsNull(){
         blackJackJFrame=null;
         players = null;
         stay=false;
