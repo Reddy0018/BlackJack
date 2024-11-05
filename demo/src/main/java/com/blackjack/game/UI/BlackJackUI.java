@@ -169,11 +169,6 @@ public class BlackJackUI implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        BlackJackUI Ui = new BlackJackUI();
-        Ui.buildBlackJackUI();
-    }
-
     private void showWinMsg(Graphics graphics, String msg){
         graphics.setFont(new Font("Arial",Font.PLAIN,30));
         graphics.setColor(Color.WHITE);
