@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -36,6 +37,17 @@ class BlackJackUITest {
         blackJackUI.actionPerformed(event);
         event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "default");
         blackJackUI.actionPerformed(event);
+        event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "Hit");
+        ActionEvent finalEvent = event;
+//        assertThrows(NullPointerException.class,()->{
+            blackJackUI.actionPerformed(finalEvent);
+       // });
+        event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "Stay");
+        finalEvent = event;
+        ActionEvent finalEvent1 = finalEvent;
+        assertThrows(NullPointerException.class,()->{
+        blackJackUI.actionPerformed(finalEvent1);
+        });
     }
 
     @Test

@@ -42,6 +42,10 @@ public class LoginTest {
         login.actionPerformed(event);
 
         event = new ActionEvent(Login.getSignupButton(),
+                ActionEvent.ACTION_PERFORMED, "startGame");
+        login.actionPerformed(event);
+
+        event = new ActionEvent(Login.getSignupButton(),
                 ActionEvent.ACTION_PERFORMED, "switchToLogin");
         login.actionPerformed(event);
     }
