@@ -148,4 +148,94 @@ public class BlackJackTest {
 
         assertEquals(21, player.getTotal());
     }
+
+    @Test
+    public void testDealerPlayFunction_PlayerBust() {
+        Player player = new Player("Player");
+        Player dealer = new Player("Dealer");
+        Stack<CardObject> deck = new Stack<>();
+        deck.addAll(Arrays.asList(
+                new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "A"),
+                new CardObject("Clubs", "3"),
+                new CardObject("Spades", "7"),
+                new CardObject("Hearts", "5")
+        ));
+
+        player.setPlayerCards(Arrays.asList(new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "8"), new CardObject("Clubs", "5")));
+        player.setOptions(new OptionsEnableClass());
+        dealer.setPlayerCards(Arrays.asList(new CardObject("Clubs", "3"),
+                new CardObject("Spades", "7")));
+        dealer.setOptions(new OptionsEnableClass());
+
+        blackJack.calculateCardsTotalValue(player);
+        blackJack.calculateCardsTotalValue(dealer);
+
+        blackJack.calculatePlayerBustStatus(player, dealer);
+
+        assertTrue(player.getBustFlag());
+        assertFalse(player.getWinFlag());
+        //assertTrue(blackJack.dealerPlayFunction(player, dealer, deck));
+    }
+
+    @Test
+    public void testDealerPlayFunction_DealerBlackjack() {
+        Player player = new Player("Player");
+        Player dealer = new Player("Dealer");
+        Stack<CardObject> deck = new Stack<>();
+        deck.addAll(Arrays.asList(
+                new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "A"),
+                new CardObject("Clubs", "3"),
+                new CardObject("Spades", "7"),
+                new CardObject("Hearts", "5")
+        ));
+
+        player.setPlayerCards(Arrays.asList(new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "9")));
+        player.setOptions(new OptionsEnableClass());
+        dealer.setPlayerCards(Arrays.asList(new CardObject("Clubs", "A"),
+                new CardObject("Spades", "10")));
+        dealer.setOptions(new OptionsEnableClass());
+
+        blackJack.calculateCardsTotalValue(player);
+        blackJack.calculateCardsTotalValue(dealer);
+
+        blackJack.calculateBlackJackStatus(dealer, player);
+
+        assertTrue(dealer.getBlackjackWin());
+        //assertFalse(dealer.getWinFlag());
+        //assertTrue(blackJack.dealerPlayFunction(player, dealer, deck));
+    }
+
+    @Test
+    public void testDealerPlayFunction_DrawGame() {
+        Player player = new Player("Player");
+        Player dealer = new Player("Dealer");
+        Stack<CardObject> deck = new Stack<>();
+        deck.addAll(Arrays.asList(
+                new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "A"),
+                new CardObject("Clubs", "3"),
+                new CardObject("Spades", "7"),
+                new CardObject("Hearts", "5")
+        ));
+
+        player.setPlayerCards(Arrays.asList(new CardObject("Hearts", "10"),
+                new CardObject("Diamonds", "8")));
+        player.setOptions(new OptionsEnableClass());
+        dealer.setPlayerCards(Arrays.asList(new CardObject("Clubs", "10"),
+                new CardObject("Spades", "8")));
+        dealer.setOptions(new OptionsEnableClass());
+
+        blackJack.calculateCardsTotalValue(player);
+        blackJack.calculateCardsTotalValue(dealer);
+
+        assertFalse(player.getWinFlag());
+        assertFalse(dealer.getWinFlag());
+        assertTrue(blackJack.dealerPlayFunction(player, dealer, deck));
+        assertTrue(player.getGameDraw());
+        assertTrue(dealer.getGameDraw());
+    }
 }
