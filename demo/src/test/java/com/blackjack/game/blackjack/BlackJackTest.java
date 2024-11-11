@@ -54,6 +54,7 @@ public class BlackJackTest {
 
     @Test
     public void testBlackJackInitialization() {
+        player.setOptions(new OptionsEnableClass());
         List<Player> players = blackJack.BlackJack(player, dealer, deck);
 
         assertEquals(2, players.get(0).getPlayerCards().size());
