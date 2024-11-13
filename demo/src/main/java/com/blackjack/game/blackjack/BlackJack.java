@@ -22,6 +22,7 @@ public class BlackJack {
         //need to build player objects
         /**dealer = new Player("Dealer");
         player = new Player("Sumanth");*/
+        
 
         //need to implement initial card distribution func to players
         player.setPlayerCards(Arrays.asList(deck.pop(),deck.pop()));
