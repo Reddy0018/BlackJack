@@ -114,8 +114,4 @@ public class UserControllerTest {
         when(userService.getActiveLoggedInUser()).thenReturn(user);
         Assertions.assertEquals(userController.getLoggenInUser(),user);
     }
-
-    /**@Test
-    void sendEmail() {
-    }*/
 }

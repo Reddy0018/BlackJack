@@ -28,11 +28,6 @@ public class Login implements ActionListener {
     @Autowired
     UserService userService;
 
-    /**public static void main(String[] args) {
-        Login login = new Login();
-        login.createLoginScreen();
-    }*/
-
     public void createLoginScreen() {
         if(null!=jFrame){
             jFrame.dispose();
@@ -204,10 +199,6 @@ public class Login implements ActionListener {
                         success.setForeground(Color.WHITE);
                         break;
                     }
-                    /**if (nameField.getText().isEmpty() || emailField.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(MandatoryFieldsExample.this,
-                                "Please fill in all required fields.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }*/
                     BeanProvider.autowire(this);
                     boolean loginStatus = userService.validateLoginDetails(loginRequestMap);
                     if(loginStatus){

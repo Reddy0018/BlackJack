@@ -38,7 +38,6 @@ public class LoginTest {
                 ActionEvent.ACTION_PERFORMED, "Sign Up");
         login.actionPerformed(event);
         assertEquals("Sign UP Success", Login.getSuccess().getText());
-        //assertEquals("User already Exists with email ID: test@example.com", Login.getSuccess().getText());
 
         event = new ActionEvent(Login.getSignupButton(),
                 ActionEvent.ACTION_PERFORMED, "SignUp");
