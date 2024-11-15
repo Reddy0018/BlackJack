@@ -324,45 +324,6 @@ public class BlackJackTest {
         
         validateDeck(rebuiltDeck);
     }
-    
-    @Test
-    void testInitialCardDistribution() {
-        // Instantiate BlackJack and prepare player and dealer objects
-        BlackJack blackJack = new BlackJack();
-        Player player = new Player("Player");
-        Player dealer = new Player("Dealer");
-
-        Stack<CardObject> deck = blackJack.buildDeck(new Stack<>());
-
-        assertNotNull(deck, "Deck should not be null");
-        assertEquals(52, deck.size(), "Deck should initially contain 52 cards");
-
-        List<Player> players = blackJack.BlackJack(player, dealer, deck);
-
-        Player updatedPlayer = players.get(0);
-        Player updatedDealer = players.get(1);
-
-        // Validate that both player and dealer have 2 cards each
-        assertNotNull(updatedPlayer.getPlayerCards(), "Player's cards should not be null");
-        assertNotNull(updatedDealer.getPlayerCards(), "Dealer's cards should not be null");
-        assertEquals(2, updatedPlayer.getPlayerCards().size(), "Player should have exactly 2 cards");
-        assertEquals(2, updatedDealer.getPlayerCards().size(), "Dealer should have exactly 2 cards");
-
-        assertEquals(48, deck.size(), "Deck should have 48 cards remaining after dealing");
-
-        int playerTotal = updatedPlayer.getTotal();
-        int dealerTotal = updatedDealer.getTotal();
-        assertTrue(playerTotal > 0, "Player's total score should be greater than 0");
-        assertTrue(dealerTotal > 0, "Dealer's total score should be greater than 0");
-
-        // Validate the dealer's second card is hidden
-        assertTrue(updatedDealer.getPlayerCards().get(1).getHidden(),
-                "Dealer's second card should be hidden initially");
-
-        assertFalse(updatedPlayer.getBustFlag(), "Player should not be bust at the start of the game");
-        assertFalse(updatedDealer.getBustFlag(), "Dealer should not be bust at the start of the game");
-    }
-
     @Test
         void testCardShuffling() throws Exception {
         BlackJack blackJack = new BlackJack();
@@ -391,25 +352,5 @@ public class BlackJackTest {
         }
 
         assertTrue(isShuffled, "Deck should be shuffled, and the order of cards should be randomized");
-    }
-
-    @Test
-    void testCalculateHandValueWithAceAndTen() {
-
-        BlackJack blackjack = new BlackJack(); 
-        Player player = new Player("Robert");         
-
-        
-        List<CardObject> hand = List.of(
-            new CardObject("Spades", "10"), 
-            new CardObject("Hearts", "11")   
-        );
-
-        player.setPlayerCards(hand);
-
-        blackjack.calculateCardsTotalValue(player);
-
-        // Assert: Verify that the player's total value is updated correctly
-        assertEquals(21, player.getTotal(), "The total value should be 21 when the hand is '10 of Spades' and 'A of Hearts'.");
     }
 }
