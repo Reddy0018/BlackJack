@@ -18,7 +18,7 @@ public class UserController {
     public Map<String,Object> login(@RequestBody Map<String,String> map) throws Exception {
         Map<String,Object> response = new HashMap<>();
         try {
-            boolean loginStatus = userService.validateLoginDetails(map);
+            userService.validateLoginDetails(map);
         }catch (Exception e){
             response.put("status", e.getMessage());
             return response;
