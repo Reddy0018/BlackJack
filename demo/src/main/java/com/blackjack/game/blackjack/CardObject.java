@@ -42,4 +42,13 @@ public class CardObject {
     public String toString() {
         return cardType+"-"+cardvalue;
     }
+
+    public boolean equals(CardObject a) {
+        if(a.getCardType().equals(this.getCardType())) {
+            if(a.getCardvalue().equals(this.getCardvalue())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
