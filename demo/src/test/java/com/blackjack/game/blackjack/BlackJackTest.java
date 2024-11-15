@@ -39,7 +39,6 @@ public class BlackJackTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockUser = new User();
-        //userService=new UserService();
         player = new Player("Player");
         dealer = new Player("Dealer");
         deck = new Stack<>();
@@ -176,7 +175,6 @@ public class BlackJackTest {
 
         assertTrue(player.getBustFlag());
         assertFalse(player.getWinFlag());
-        //assertTrue(blackJack.dealerPlayFunction(player, dealer, deck));
     }
 
     @Test
@@ -205,8 +203,6 @@ public class BlackJackTest {
         blackJack.calculateBlackJackStatus(dealer, player);
 
         assertTrue(dealer.getBlackjackWin());
-        //assertFalse(dealer.getWinFlag());
-        //assertTrue(blackJack.dealerPlayFunction(player, dealer, deck));
     }
 
     @Test

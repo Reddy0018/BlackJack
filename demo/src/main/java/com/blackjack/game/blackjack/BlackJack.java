@@ -19,11 +19,6 @@ public class BlackJack {
         //Shuffling the building deck
         shuffleDeck(deck);
 
-        //need to build player objects
-        /**dealer = new Player("Dealer");
-        player = new Player("Sumanth");*/
-
-
         //need to implement initial card distribution func to players
         player.setPlayerCards(Arrays.asList(deck.pop(),deck.pop()));
         dealer.setPlayerCards(Arrays.asList(deck.pop(),deck.pop()));
@@ -39,8 +34,6 @@ public class BlackJack {
         //Calculate if the player Score went above 21
         calculatePlayerBustStatus(player,dealer);
 
-        /**System.out.println("Dealer Cards:: "+ dealer);
-        System.out.println("Dealer Cards:: "+ player);*/
         return Arrays.asList(player,dealer);
     }
 
@@ -55,8 +48,6 @@ public class BlackJack {
                 deck.add(object);
             }
         }
-        /**System.out.println("Deck:: "+ deck);
-        System.out.println("Deck:: "+ deck.size());*/
         return deck;
     }
 
@@ -105,7 +96,6 @@ public class BlackJack {
             return true;
         }
 
-       // if(dealer.getTotal()>17 && !dealer.getWinFlag()){
         if(dealer.getTotal()>17 && dealer.getTotal()<player.getTotal()){
                 dealer.setBustFlag(true);
                 dealer.setWinFlag(false);
@@ -140,8 +130,6 @@ public class BlackJack {
 
     private void shuffleDeck(Stack<CardObject> deck){
         Collections.shuffle(deck);
-        /**System.out.println("Shuffled Deck:: "+ deck);
-        System.out.println("Shuffled Deck:: "+ deck.size());*/
     }
 
     public void calculateBlackJackStatus(Player player, Player dealer){
@@ -150,8 +138,6 @@ public class BlackJack {
             player.getOptions().setEnableStandButton(false);
             player.setWinFlag(true);
             player.setBlackjackWin(true);
-            //dealer.setBustFlag(true);
-            //dealer.setWinFlag(false);
         }
     }
 
@@ -185,15 +171,11 @@ public class BlackJack {
                 if(total+11<=21){
                     total+=11;
                 }else {
-                    /**if(total+1>21){
-                        player.setWinFlag(false);
-                    }*/
                     total+=1;
                 }
             }
         }
         player.setTotal(total);
-        /**System.out.println("Player Total:: "+ player.getTotal());*/
     }
 
 }

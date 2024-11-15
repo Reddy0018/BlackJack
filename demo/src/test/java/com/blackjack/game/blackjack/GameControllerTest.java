@@ -32,10 +32,6 @@ class GameControllerTest {
             gameController.playerHitCards();
         });
 
-        /**assertThrows(RuntimeException.class,()->{
-            gameController.playerHitStandButton();
-        });*/
-
         playerList.get(0).setTotal(21);
         gameController.setOptions(playerList.get(0));
     }

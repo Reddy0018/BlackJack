@@ -14,8 +14,6 @@ public class GameApplication {
 
 	public static void main(String[] args) {
 		System.out.println("Test");
-		/**Test test = new Test();
-		test.main(args);*/
 		login.createLoginScreen();
 		SpringApplication.run(GameApplication.class, args);
 	}

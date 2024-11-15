@@ -116,8 +116,6 @@ public class BlackJackUI implements ActionListener {
         blackJackJFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         blackJackPanel.setLayout(new BorderLayout());
-        /**blackJackPanel.setBackground(new Color(53,101,77));
-        blackJackPanel.setBackground(Color.white);*/
         blackJackJFrame.add(blackJackPanel);
 
         if(players.get(1).getPlayerCards().get(1).getHidden()){
@@ -127,13 +125,10 @@ public class BlackJackUI implements ActionListener {
             dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
         }
 
-        /**dealerTotal = new JLabel("Dealer Total: "+players.get(1).getTotal());
-        dealerTotal.setBounds(10,150,110,80);*/
         dealerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(dealerTotal,BorderLayout.BEFORE_FIRST_LINE);
 
         playerTotal = new JLabel("Player Total: "+players.get(0).getTotal());
-        //playerTotal.setBounds(180,320,110,80);
         playerTotal.setForeground(Color.WHITE);
         blackJackPanel.add(playerTotal,BorderLayout.SOUTH);
 
@@ -204,7 +199,6 @@ public class BlackJackUI implements ActionListener {
                 buildBlackJackUI();
                 break;
             case "startOver":
-                //controller.startGame();
                 blackJackJFrame.dispose();
                 setFieldsNull();
                 buildBlackJackUI();

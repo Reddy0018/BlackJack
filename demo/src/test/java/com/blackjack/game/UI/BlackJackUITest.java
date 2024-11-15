@@ -39,9 +39,7 @@ class BlackJackUITest {
         blackJackUI.actionPerformed(event);
         event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "Hit");
         ActionEvent finalEvent = event;
-//        assertThrows(NullPointerException.class,()->{
-            blackJackUI.actionPerformed(finalEvent);
-       // });
+        blackJackUI.actionPerformed(finalEvent);
         event = new ActionEvent(jButton, ActionEvent.ACTION_PERFORMED, "Stay");
         finalEvent = event;
         ActionEvent finalEvent1 = finalEvent;

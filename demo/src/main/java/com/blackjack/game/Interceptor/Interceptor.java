@@ -20,7 +20,6 @@ public class Interceptor implements HandlerInterceptor {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setCharacterEncoding("UTF-8");
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-            //response.sendError(HttpServletResponse.SC_FORBIDDEN,"User not authenticated needs to be loggedIn to perform operations");
             response.getWriter().write("User not authenticated needs to be loggedIn to perform operations!");
             return false;
         }

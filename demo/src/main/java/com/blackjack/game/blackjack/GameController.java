@@ -65,13 +65,6 @@ public class GameController {
         player.setPlayerCards(playerCards);
         blackJack.calculateCardsTotalValue(player);
         blackJack.calculatePlayerBustStatus(player, dealer);
-        //blackJack.calculateBlackJackStatus(player, dealer);
-        /**if(player.getTotal()==21){
-            player.getOptions().setEnableHitButton(false);
-            player.getOptions().setEnableStandButton(false);
-            player.setWinFlag(true);
-            dealer.setBustFlag(true);
-        }*/
         setOptions(player);
 
         return Arrays.asList(player,dealer);
@@ -103,7 +96,6 @@ public class GameController {
          */
         player.getOptions().setPlayerTurn(false);
         player.getOptions().setEnableHitButton(false);
-        //player.getOptions().setEnableStandButton(false);
 
         blackJack.dealerPlayFunction(player,dealer,deck);
 
